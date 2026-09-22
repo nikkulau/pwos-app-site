@@ -1,0 +1,16 @@
+{
+  "name": "PWOS Experience Shell",
+  "short_name": "PWOS",
+  "description": "Shell experimental do Personal Wisdom Operating System — memória volátil, sem backend, sem LLM embutido.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "id": "./",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#0b1220",
+  "theme_color": "#0b1220",
+  "icons": [
+    { "src": "icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" }
+  ]
+}

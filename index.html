@@ -1,0 +1,180 @@
+<!doctype html>
+<html lang="pt-PT">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>PWOS Experience Shell</title>
+  <meta name="description" content="Shell experimental do PWOS — memória volátil, sem backend, sem LLM embutido." />
+
+  <link rel="manifest" href="manifest.webmanifest" />
+  <meta name="theme-color" content="#0b1220" />
+
+  <!-- iOS: instalação como PWA -->
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="apple-mobile-web-app-title" content="PWOS" />
+  <link rel="apple-touch-icon" href="icons/apple-touch-icon.png" />
+  <link rel="icon" href="icons/favicon-32.png" sizes="32x32" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="app-header">
+    <h1>PWOS Experience Shell</h1>
+    <p>Iteração 0 · memória volátil · sem backend · sem LLM embutido</p>
+  </header>
+
+  <main id="main">
+    <!-- CONVERSAR -->
+    <section id="view-conversar" class="view" aria-labelledby="title-conversar">
+      <h2 class="view-title" id="title-conversar">Conversar</h2>
+      <p class="view-subtitle">Ponte manual para uma conversa real com ChatGPT ou Claude. Esta Shell não tem nenhum modelo de linguagem embutido.</p>
+
+      <div id="core-status-badge-wrap" class="card">
+        <span id="core-status-badge" class="badge pending">a carregar…</span>
+        <p class="meta-line" id="core-meta-line"></p>
+      </div>
+
+      <div class="card">
+        <label for="core-text-area">Núcleo Condensado da Constituição PWOS (contexto formatado)</label>
+        <pre class="core-text" id="core-text-preview"></pre>
+        <div class="row">
+          <button class="primary" id="btn-copy-core" type="button">Copiar contexto</button>
+        </div>
+        <p class="status-line" id="copy-status" role="status" aria-live="polite"></p>
+      </div>
+
+      <div class="card">
+        <p class="meta-line">Depois de copiar o contexto, abre a conversa externa e cola-o antes da tua mensagem.</p>
+        <div class="row">
+          <a class="secondary link-button" href="https://chat.openai.com" target="_blank" rel="noopener">Abrir ChatGPT ↗</a>
+          <a class="secondary link-button" href="https://claude.ai" target="_blank" rel="noopener">Abrir Claude ↗</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- CAPTURAR -->
+    <section id="view-capturar" class="view" aria-labelledby="title-capturar">
+      <h2 class="view-title" id="title-capturar">Capturar</h2>
+      <p class="view-subtitle">Regista observações e reflexões durante esta sessão.</p>
+
+      <div class="notice">
+        <strong>Memória volátil.</strong> As capturas existem apenas enquanto esta página estiver aberta. Ao recarregar ou fechar, desaparecem — não são gravadas em lado nenhum.
+      </div>
+
+      <div class="card">
+        <label for="capture-input">Nova observação</label>
+        <textarea id="capture-input" rows="4" placeholder="Escreve aqui…"></textarea>
+        <div class="row">
+          <button class="primary" id="btn-add-capture" type="button">Guardar nesta sessão</button>
+          <button class="danger" id="btn-clear-captures" type="button">Limpar tudo</button>
+        </div>
+      </div>
+
+      <div class="card">
+        <p class="meta-line" id="capture-count-line"></p>
+        <ul class="capture-list" id="capture-list"></ul>
+        <p class="empty-state" id="capture-empty">Ainda sem capturas nesta sessão.</p>
+      </div>
+    </section>
+
+    <!-- CONSULTAR -->
+    <section id="view-consultar" class="view" aria-labelledby="title-consultar">
+      <h2 class="view-title" id="title-consultar">Consultar</h2>
+      <p class="view-subtitle">Núcleo Condensado da Constituição PWOS aprovado. Não há aqui memória pessoal, histórico ou acesso ao Google Drive.</p>
+
+      <div class="card">
+        <span id="core-status-badge-2" class="badge pending">a carregar…</span>
+        <p class="meta-line" id="core-meta-line-2"></p>
+      </div>
+
+      <div class="card">
+        <pre class="core-text" id="core-text-full"></pre>
+      </div>
+    </section>
+
+    <!-- HOJE -->
+    <section id="view-hoje" class="view" aria-labelledby="title-hoje">
+      <h2 class="view-title" id="title-hoje">Hoje</h2>
+      <p class="view-subtitle">Contexto experimental desta sessão. Sem dados vivos, sensores ou integrações externas.</p>
+
+      <div class="card">
+        <p class="meta-line">Data e hora local</p>
+        <p id="hoje-datetime" style="font-size:22px; margin:2px 0 14px;"></p>
+
+        <p class="meta-line">Sessão iniciada em</p>
+        <p id="hoje-session-start" style="margin:2px 0 14px;"></p>
+
+        <p class="meta-line">Capturas nesta sessão</p>
+        <p id="hoje-capture-count" style="margin:2px 0;"></p>
+      </div>
+
+      <div class="notice">
+        Esta superfície é experimental e serve para testar se este tipo de painel é reconhecido como útil. Não lê sensores, localização, calendário nem qualquer serviço externo.
+      </div>
+    </section>
+
+    <!-- AVALIAR (Experience Assessment) -->
+    <section id="view-avaliar" class="view" aria-labelledby="title-avaliar">
+      <h2 class="view-title" id="title-avaliar">Avaliar experiência</h2>
+      <p class="view-subtitle">Formulário transitório (baseado na proposta PWOS-RI v1.1). Esta Shell não escreve diretamente no PWOS-RI — copia o resultado e regista-o onde o PWOS-RI é mantido.</p>
+
+      <div class="card">
+        <label for="assess-reconhecimento">Reconheceste esta experiência como PWOS?</label>
+        <select id="assess-reconhecimento">
+          <option value="">— selecionar —</option>
+          <option value="sim">Sim, plenamente</option>
+          <option value="parcial">Parcialmente</option>
+          <option value="nao">Não</option>
+        </select>
+      </div>
+
+      <div class="card">
+        <label for="assess-capacidades">Capacidades em falta</label>
+        <textarea id="assess-capacidades" rows="3"></textarea>
+      </div>
+
+      <div class="card">
+        <label for="assess-friccoes">Fricções</label>
+        <textarea id="assess-friccoes" rows="3"></textarea>
+      </div>
+
+      <div class="card">
+        <label for="assess-causas">Causas de falha</label>
+        <textarea id="assess-causas" rows="3"></textarea>
+      </div>
+
+      <div class="card">
+        <label for="assess-correcoes">Correções e observações</label>
+        <textarea id="assess-correcoes" rows="3"></textarea>
+      </div>
+
+      <div class="row">
+        <button class="primary" id="btn-copy-assessment" type="button">Copiar avaliação</button>
+        <button class="secondary" id="btn-reset-assessment" type="button">Limpar formulário</button>
+      </div>
+      <p class="status-line" id="assessment-status" role="status" aria-live="polite"></p>
+    </section>
+  </main>
+
+  <nav class="tabbar" aria-label="Navegação principal">
+    <button type="button" data-view="conversar" class="active">
+      <span class="icon" aria-hidden="true">💬</span>Conversar
+    </button>
+    <button type="button" data-view="capturar">
+      <span class="icon" aria-hidden="true">✍️</span>Capturar
+    </button>
+    <button type="button" data-view="consultar">
+      <span class="icon" aria-hidden="true">📖</span>Consultar
+    </button>
+    <button type="button" data-view="hoje">
+      <span class="icon" aria-hidden="true">🗓️</span>Hoje
+    </button>
+    <button type="button" data-view="avaliar">
+      <span class="icon" aria-hidden="true">📝</span>Avaliar
+    </button>
+  </nav>
+
+  <script type="module" src="js/app.js"></script>
+</body>
+</html>

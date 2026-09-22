@@ -1,0 +1,279 @@
+:root {
+  --bg: #0b1220;
+  --bg-elevated: #121b2e;
+  --border: #223049;
+  --text: #e6edf7;
+  --text-dim: #9fb0c9;
+  --accent: #7dd3fc;
+  --warn-bg: #2a1c10;
+  --warn-border: #7c5a24;
+  --warn-text: #f0c987;
+  --danger: #f87171;
+  --radius: 14px;
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  min-height: 100dvh;
+  padding-top: env(safe-area-inset-top);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+header.app-header {
+  padding: 14px 18px 10px;
+  border-bottom: 1px solid var(--border);
+}
+
+header.app-header h1 {
+  font-size: 17px;
+  margin: 0;
+  letter-spacing: 0.02em;
+}
+
+header.app-header p {
+  margin: 2px 0 0;
+  font-size: 12px;
+  color: var(--text-dim);
+}
+
+main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 16px;
+  padding-bottom: 90px;
+}
+
+section.view {
+  display: none;
+}
+
+section.view.active {
+  display: block;
+}
+
+h2.view-title {
+  font-size: 20px;
+  margin: 0 0 4px;
+}
+
+p.view-subtitle {
+  font-size: 13px;
+  color: var(--text-dim);
+  margin: 0 0 18px;
+}
+
+.card {
+  background: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 14px 16px;
+  margin-bottom: 14px;
+}
+
+.card + .card {
+  margin-top: 0;
+}
+
+.notice {
+  background: var(--warn-bg);
+  border: 1px solid var(--warn-border);
+  color: var(--warn-text);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  font-size: 13px;
+  margin-bottom: 14px;
+}
+
+.notice strong {
+  color: #ffd98a;
+}
+
+label {
+  display: block;
+  font-size: 12px;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+
+textarea, select {
+  width: 100%;
+  background: #0e1626;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 15px;
+  font-family: inherit;
+  resize: vertical;
+}
+
+textarea:focus, select:focus {
+  outline: 2px solid var(--accent);
+  outline-offset: 1px;
+}
+
+button,
+a.link-button {
+  appearance: none;
+  border: none;
+  border-radius: 10px;
+  padding: 10px 16px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+a.link-button {
+  display: inline-block;
+  text-decoration: none;
+  line-height: 1.2;
+}
+
+button.primary {
+  background: var(--accent);
+  color: #06121f;
+}
+
+button.secondary,
+a.link-button {
+  background: transparent;
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+
+button.danger {
+  background: transparent;
+  color: var(--danger);
+  border: 1px solid #5b2a2a;
+}
+
+button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 10px;
+}
+
+ul.capture-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+ul.capture-list li {
+  border-top: 1px solid var(--border);
+  padding: 10px 0;
+}
+
+ul.capture-list li:first-child {
+  border-top: none;
+}
+
+.capture-meta {
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 4px;
+}
+
+.capture-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 14px;
+}
+
+pre.core-text {
+  white-space: pre-wrap;
+  word-break: break-word;
+  font-size: 13.5px;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.meta-line {
+  font-size: 12px;
+  color: var(--text-dim);
+  margin: 2px 0;
+}
+
+.badge {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  padding: 2px 8px;
+  border-radius: 999px;
+  background: rgba(125, 211, 252, 0.15);
+  color: var(--accent);
+}
+
+.badge.pending {
+  background: rgba(240, 201, 135, 0.15);
+  color: var(--warn-text);
+}
+
+nav.tabbar {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  background: var(--bg-elevated);
+  border-top: 1px solid var(--border);
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+nav.tabbar button {
+  flex: 1;
+  background: none;
+  border: none;
+  border-radius: 0;
+  color: var(--text-dim);
+  font-size: 11px;
+  font-weight: 500;
+  padding: 10px 4px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+}
+
+nav.tabbar button .icon {
+  font-size: 18px;
+}
+
+nav.tabbar button.active {
+  color: var(--accent);
+}
+
+.empty-state {
+  color: var(--text-dim);
+  font-size: 13px;
+  font-style: italic;
+}
+
+.status-line {
+  font-size: 12px;
+  color: var(--accent);
+  min-height: 16px;
+  margin-top: 6px;
+}
